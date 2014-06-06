@@ -17,3 +17,7 @@
 
 # Ignore local vagrant stuff
 /.vagrant
+
+# Ignore editor files
+/*.komodoproject
+/.komodotools
