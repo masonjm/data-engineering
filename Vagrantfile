@@ -8,8 +8,11 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 3000, host: 3000
   
   config.vm.provision :shell, inline: <<SCRIPT
+    # Get some dependencies
     apt-get install -y ruby-dev sqlite3 libsqlite3-dev
+    # Spring wants a newer version of rubygems, and Debian makes you work it
     REALLY_GEM_UPDATE_SYSTEM=1 gem update --system
+    # Install the project's gems
     gem install bundler --no-rdoc --no-ri
     cd /vagrant && sudo -u vagrant bundle install
 SCRIPT
