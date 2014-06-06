@@ -22,7 +22,7 @@ RSpec.describe Importer do
     expect(item.purchases.count).to be(1)
     expect(item.merchant.name).to eq("Bob's Pizza")
   end
-  
+
   it 'should import multiple valid rows' do
     importer = Importer.new(four_rows_data)
     status = importer.import
@@ -85,5 +85,11 @@ RSpec.describe Importer do
     expect(status).to be(false)
     expect(importer.errors.length).to be(1)
     expect(importer.errors.first[0].to_s).to eq('Missing merchant name')
+  end
+
+  it 'should report import status', :focus do
+    importer = Importer.new(one_row_data)
+    importer.import
+    expect(importer.status).to eq(:success)
   end
 end

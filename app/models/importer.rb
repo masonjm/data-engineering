@@ -1,7 +1,7 @@
 require 'csv'
 
 class Importer
-  attr_reader :errors, :row_count, :imported_count
+  attr_reader :errors, :row_count, :imported_count, :status
   
   def initialize(data)
     # TODO: handle passing a file reference instead of a string to limit memory usage
@@ -9,6 +9,7 @@ class Importer
     @errors = []
     @row_count = 0
     @imported_count = 0
+    @status = :failed
   end
   
   def import
@@ -21,7 +22,8 @@ class Importer
         @errors << [e, row]
       end
     end
-    @errors.blank?
+    @status = :success if @errors.blank?
+    @status == :success
   end
   
   protected
