@@ -92,4 +92,10 @@ RSpec.describe Importer do
     importer.import
     expect(importer.status).to eq(:success)
   end
+
+  it 'should calculate gross revenue' do
+    importer = Importer.new(four_rows_data)
+    importer.import
+    expect(importer.gross_revenue).to eq(95.0)
+  end
 end

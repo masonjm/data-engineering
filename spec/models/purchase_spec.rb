@@ -15,4 +15,10 @@ RSpec.describe Purchase, :type => :model do
     purchase = build(:purchase, item: nil)
     expect(purchase).to have(1).error_on(:item)
   end
+
+  it "should calculate total" do
+    item = build(:item, price: 3.0)
+    purchase = build(:purchase, quantity: 2, item: item)
+    expect(purchase.total).to eq(6.0)
+  end
 end

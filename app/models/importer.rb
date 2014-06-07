@@ -1,7 +1,7 @@
 require 'csv'
 
 class Importer
-  attr_reader :errors, :row_count, :imported_count, :status
+  attr_reader :errors, :row_count, :imported_count, :status, :gross_revenue
   
   def initialize(data)
     # TODO: handle passing a file reference instead of a string to limit memory usage
@@ -10,13 +10,14 @@ class Importer
     @row_count = 0
     @imported_count = 0
     @status = :failed
+    @gross_revenue = 0.0
   end
   
   def import
     CSV.parse(@data, col_sep: "\t", headers: true) do |row|
       @row_count += 1
       begin
-        import_purchase!(row)
+        @gross_revenue += import_purchase!(row).total
         @imported_count += 1
       rescue => e
         @errors << [e, row]

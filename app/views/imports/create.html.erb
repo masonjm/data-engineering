@@ -16,6 +16,10 @@
           <th>Rows with Errors</th>
           <td class="<%= "danger" if @importer.status == :failed %>"><%= @importer.errors.length %></td>
         </tr>
+        <tr>
+          <th>Gross Revenue in Import</th>
+          <td><%= number_to_currency(@importer.gross_revenue) %></td>
+        </tr>
       </tbody>
     </table>
   </div>
