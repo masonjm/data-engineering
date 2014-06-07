@@ -1,0 +1,21 @@
+<div class="row">
+  <%= form_tag imports_url, multipart: true do %>
+    <div class="col-md-12">
+      <div class="well">
+        <p class="help-block">
+          Choose a file to import. The file must be tab delimeted and have a header row with the following fields:<br/>
+        </p>
+        <ul>
+          <li>purchaser name</li>
+          <li>item description</li>
+          <li>item price</li>
+          <li>purchase count</li>
+          <li>merchant address</li>
+          <li>merchant name</li>
+        </ul>
+      </div>
+      <%= file_field_tag :data, class: "form-control" %>
+      <%= submit_tag "Import", class: "btn btn-default" %>
+    </div>
+  <% end %>
+</div>

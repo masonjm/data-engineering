@@ -87,7 +87,7 @@ RSpec.describe Importer do
     expect(importer.errors.first[0].to_s).to eq('Missing merchant name')
   end
 
-  it 'should report import status', :focus do
+  it 'should report import status' do
     importer = Importer.new(one_row_data)
     importer.import
     expect(importer.status).to eq(:success)

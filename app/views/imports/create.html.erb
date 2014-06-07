@@ -1,0 +1,46 @@
+<h1 class="<%= import_status %>"><%= @importer.status.to_s.titleize %></h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <th>Rows Processed</th>
+          <td><%= @importer.row_count %></td>
+        </tr>
+        <tr>
+          <th>Rows Imported</th>
+          <td class="success"><%= @importer.imported_count %></td>
+        </tr>
+        <tr>
+          <th>Rows with Errors</th>
+          <td class="<%= "danger" if @importer.status == :failed %>"><%= @importer.errors.length %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-8">
+    <% if @importer.errors.present? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Error</th>
+            <th>Data Row</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%- @importer.errors.each do |error| -%>
+            <tr>
+              <td><%= error[0] %></td>
+              <td><%= error[1].to_csv(col_sep: "|") %></td>
+            </tr>
+          <%- end -%>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p><%= link_to "&laquo; Back".html_safe, imports_url %></p>
+</div>
