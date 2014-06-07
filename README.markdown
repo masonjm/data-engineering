@@ -22,3 +22,11 @@ If you don't have a working Ruby installation, this app is also setup to run wit
 5. Once the VM is started, run `vagrant ssh` to connect to the VM
 6. Run `cd /vagrant`, `rake db:migrate` and `rails server` to start Webrick
 7. Point your browser to http://localhost:3000
+
+## TODO
+
+* Don't read import file into memory before parsing it
+* Convert Importer into a full model (ImportJob?) to keep historical status information
+* Get Devise/Omniauth working
+* Implement user management with a role-based authorization system (otherwise signing in is pointless)
+* Duplicate data checking
